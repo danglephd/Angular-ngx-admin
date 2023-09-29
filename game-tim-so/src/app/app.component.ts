@@ -67,6 +67,7 @@ export class AppComponent implements OnInit {
   }
 
   private gameTimer() {
+
     // Get today's date and time
     let addTime = 0; // 3595;
 
@@ -107,7 +108,7 @@ export class AppComponent implements OnInit {
       if (this.x) {
         clearInterval(this.x);
       }
-      this.x = setInterval(this.gameTimer, 1000);
+      this.x = setInterval(() => { this.gameTimer(); }, 1000);
     } else {
       console.log('>>>>Something Wrong');
     }
@@ -175,10 +176,10 @@ export class AppComponent implements OnInit {
                 clearInterval(parent.x);
                 parent.vn_number.nativeElement.innerHTML = ' - ';
                 parent.gameFinishPan.nativeElement.style.display = "flex";
-                parent.final_timer.nativeElement.style.display = parent.vn_timer.nativeElement.innerHTML;
+                parent.final_timer.nativeElement.innerHTML = parent.vn_timer.nativeElement.innerHTML;
               }
-            }else{
-              console.log('>>>>Click Fail'); 
+            } else {
+              console.log('>>>>Click Fail');
             }
 
           });
