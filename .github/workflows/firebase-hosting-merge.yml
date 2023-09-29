@@ -11,9 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Update package-lock.json
+        run: |
+          cd game-tim-so
+          npm install
+      - run: (cd game-tim-so && npm ci)
+      - run: (cd game-tim-so && npm run build)
+      - name: Deploy to Firebase 
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entryPoint: "./game-tim-so"
+          node-version: '14'
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULAR_TIM_SO }}'
           channelId: live
