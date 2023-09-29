@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initBoard();
   }
 
   public changeNav() {
@@ -64,6 +65,27 @@ export class AppComponent implements OnInit {
     this.isShowSidenav = false;
     if (this.mySidenav)
       this.mySidenav.nativeElement.style.width = "0";
+  }
+
+  private initBoard() {
+    if (this.data.zoomBoard && this.data.numbLength) {
+      let item = window.localStorage.getItem("zoomBoard");
+      if (item) {
+        this.data.zoomBoard = parseInt(item);
+      }
+      item = window.localStorage.getItem("numbLength");
+      if (item) {
+        this.data.numbLength = parseInt(item);
+      }
+      item = window.localStorage.getItem("font_size");
+      if (item) {
+        this.data.font_size = parseInt(item);
+      }
+      item = window.localStorage.getItem("delta_top");
+      if (item) {
+        this.data.delta_top = parseInt(item);
+      }
+    }
   }
 
   private gameTimer() {
